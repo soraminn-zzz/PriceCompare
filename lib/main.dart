@@ -116,9 +116,30 @@ class _CompareScreenState extends State<CompareScreen> {
                 _addProduct();
               },
               child: const Text('比較'),
-            )
+            ),
 
-            
+            Expanded(
+              child: _compareList.isEmpty
+                  ?
+                    const Center(
+                      child: Text(
+                        '商品を追加してください',
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                    )
+                  :
+                    ListView.builder(
+                      itemCount: _compareList.length,
+                      itemBuilder: (context, index) {
+                        final item = _compareList[index];
+                        return ListTile(
+                          title: Text(item['name'] ?? '名称未設定'),
+                          subtitle: Text('価格: ${item['price']}円 / 単位: ${item['quantity']}'),
+                          trailing: Text('単価: ${item['unitprice'].toStringAsFixed(1)}円'),
+                        );
+                      },
+                    ),
+            )
           ],
         ),
       ),
