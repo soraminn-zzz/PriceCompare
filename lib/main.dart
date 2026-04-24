@@ -31,6 +31,7 @@ class CompareScreen extends StatefulWidget {
 
 class _CompareScreenState extends State<CompareScreen> {
       final _compareList = <Map<String, dynamic>>[];
+      final _cartList = <Map<String, dynamic>>[];
 
       final TextEditingController _nameController = TextEditingController();
       final TextEditingController _priceControllerA = TextEditingController();
@@ -60,15 +61,20 @@ class _CompareScreenState extends State<CompareScreen> {
           'name': '$name (A)',
           'price': priceA,
           'quantity': quantityA,
-          'unitprice': unitPriceA,
+          'unitPrice': unitPriceA,
         },
         {
           'name': '$name (B)',
           'price': priceB,
           'quantity': quantityB,
-          'unitprice': unitPriceB,
+          'unitPrice': unitPriceB,
         }
       ]);
+
+      final cheapestIndex = _cheapestIndex();
+      if (cheapestIndex != -1) {
+        _cartList.add(_compareList[cheapestIndex]);
+      }
     });
   }
 
@@ -113,6 +119,7 @@ class _CompareScreenState extends State<CompareScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final total = _cartList.fold(0.0, (sum, item) => sum + item['price']);
     return Scaffold(
 
       appBar: AppBar(
@@ -223,13 +230,39 @@ class _CompareScreenState extends State<CompareScreen> {
 
                               title: Text(item['name'] ?? '名称未設定'),
                               subtitle: Text('価格: ${item['price']}円 / 単位: ${item['quantity']}'),
-                              trailing: Text('単価: ${item['unitprice'].toStringAsFixed(1)}'),
+                              trailing: Text('単価: ${item['unitPrice'].toStringAsFixed(1)}'),
                                   );
                           },
                         );
                       },
                     )
-            )
+            ),
+
+              const Divider(),
+
+
+            Expanded(
+              child: _cartList.isEmpty
+                  ?
+                    const Center(
+                      child: Text(
+                        'カートは空です',
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                    )
+                  :
+                    Column(
+                      children: [
+                        ..._cartList.map((item) {
+                          return ListTile(
+                            title: Text(item['name']),
+                            subtitle: Text('${item['price']}円'),
+                          );
+                        }),
+                        Text('合計： ${total.toStringAsFixed(1)}円'),
+                      ],
+                    ),
+            ),
           ],
         ),
       ),
