@@ -159,12 +159,16 @@ class _CompareScreenState extends State<CompareScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(
+            onPressed: () async {
+              await Navigator.push(
               context,
               MaterialPageRoute(builder: (_) =>
-              SettingsScreen()),
+              SettingsScreen(
+                onThemeChanged: widget.onThemeChanged,
+                currentMode: widget.currentMode,
+              )),
               );
+              setState(() {});
             },
           ),
         ]
