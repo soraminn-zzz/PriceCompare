@@ -1,17 +1,37 @@
-# price_compare
+# 単価比較くん (Price-Compare-App)
 
-A new Flutter project.
+日常の買い物をよりスマートに。内容量と価格から「本当のお得」を瞬時に判定する単価比較アプリです。
 
-## Getting Started
+## 📱 概要
+スーパーで内容量や価格が異なる商品を比較する際、「どちらが本当にお得か」を暗算する手間を省きたいという思いから本アプリを開発しました。
+単なる計算機能に加え、ショッピングカート機能や履歴保存、高度なUIカスタマイズ機能を搭載し、実用性と使い心地を両立させています。
 
-This project is a starting point for a Flutter application.
+## ✨ 主な機能
+- **単価比較・最安値判定**: 2つの商品の価格と容量から単価を算出し、最安値をハイライト表示。
+- **ショッピングカート**: 比較した商品をカートに入れ、合計金額をリアルタイムで確認。
+- **比較履歴の保存**: 最安値商品を日時と共にローカル保存（最新30件）。
+- **UIカスタマイズ**:
+  - ダークモード/ライトモード切り替え
+  - 背景画像の自由設定（ギャラリーからの取得・切り取り機能）
+  - パネルの透過度調整スライダー
+- **直感的な操作性**: エンターキーによる入力欄の自動遷移など、スムーズなUXを実現。
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠 技術スタック
+- **Framework**: Flutter (Dart)
+- **Local Database**: SharedPreferences (JSONエンコード/デコードを活用)
+- **Package**:
+  - `image_picker`: ギャラリーからの画像取得
+  - `image_cropper`: 画像の切り取り（クロップ）機能
+  - `flutter_launcher_icons`: アプリアイコンの自動生成
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 導入方法
+1. Flutter環境が構築されていることを確認
+2. リポジトリをクローン
+   ```bash
+   git clone [https://github.com/soraminn-zzz/PriceCompare]
+3. パッケージのインストール
+   ```bash
+   flutter pub get
+4. アプリの実行
+   ```bash
+   flutter run
